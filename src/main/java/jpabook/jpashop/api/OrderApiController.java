@@ -70,14 +70,6 @@ public class OrderApiController {
         return result;
     }
 
-    /**
-     * V4 JPA에서 DTO 직접 조회
-     */
-    @GetMapping("/api/v4/orders")
-    public List<OrderQueryDto> ordersV4(){
-        return orderQueryRepository.findOrderQueryDtos();
-    }
-
     @Data
     static class OrderDto {
 
@@ -114,4 +106,23 @@ public class OrderApiController {
             count = orderItem.getCount();
         }
     }
+
+
+    /**
+     * V4 JPA에서 DTO 직접 조회
+     */
+    @GetMapping("/api/v4/orders")
+    public List<OrderQueryDto> ordersV4(){
+        return orderQueryRepository.findOrderQueryDtos();
+    }
+
+    /**
+     * V5 JPA에서 DTO 직접 조회 - 컬렉션 조회 최적화
+     */
+    @GetMapping("/api/v5/orders")
+    public List<OrderQueryDto> ordersV5(){
+        return orderQueryRepository.findAllByDto_optimization();
+    }
+
+
 }
